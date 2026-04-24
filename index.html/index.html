@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>25 歳おめでとう！</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'PingFang SC','Microsoft YaHei',sans-serif}
+html,body{width:100%;height:100%;overflow:hidden;background:#000}
+.page{position:absolute;width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 0.8s ease,transform 0.8s ease}
+.arrow{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);color:#fff;font-size:14px;opacity:0.7;z-index:999}
+
+/* 礼物封面 */
+#page1{background:#000;color:#fff}
+.gift{font-size:60px;cursor:pointer;animation:shake 1s infinite}
+@keyframes shake{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.title{font-size:36px;font-weight:bold;color:#ffd700;opacity:0;transition:all 1s}
+
+/* 华丽标题效果 - 珍珠贝母琉璃质感 */
+.fancy-title{position:relative;display:none;text-align:center}
+.fancy-title h1{
+    font-size:48px;
+    font-weight:bold;
+    /* 珍珠贝母渐变 + 琉璃质感 */
+    background:linear-gradient(
+        135deg,
+        #ffd700 0%,
+        #ffecd2 10%,
+        #f8c8dc 20%,
+        #ffb6c1 30%,
+        #e6e6fa 40%,
+        #b0e0e6 50%,
+        #f0f8ff 60%,
+        #ffd700 70%,
+        #ff69b4 80%,
+        #dda0dd 90%,
+        #ffd700 100%
+    );
+    background-size:300% 300%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    /* 珍珠光泽阴影 */
+    filter:drop-shadow(0 0 15px rgba(255,215,0,0.6))
+           drop-shadow(0 0 30px rgba(255,182,193,0.4))
+           drop-shadow(0 0 45px rgba(230,230,250,0.3));
+    animation:pearlShift 8s ease infinite, elegantBounce 1.2s cubic-bezier(0.34,1.56,0.64,1);
+    margin:0 0 25px 0;
+    line-height:1.5;
+    letter-spacing:2px;
+    position:relative
+}
+/* 珍珠贝母光泽动画 - 缓慢优雅 */
+@keyframes pearlShift{
+    0%{background-position:0% 50%;filter:hue-rotate(0deg) drop-shadow(0 0 15px rgba(255,215,0,0.6))}
+    25%{filter:hue-rotate(8deg) drop-shadow(0 0 20px rgba(255,182,193,0.5))}
+    50%{background-position:100% 50%;filter:hue-rotate(15deg) drop-shadow(0 0 15px rgba(230,230,250,0.6))}
+    75%{filter:hue-rotate(8deg) drop-shadow(0 0 20px rgba(176,224,230,0.5))}
+    100%{background-position:0% 50%;filter:hue-rotate(0deg) drop-shadow(0 0 15px rgba(255,215,0,0.6))}
+}
+@keyframes elegantBounce{
+    0%{transform:scale(0) translateY(-50px);opacity:0}
+    40%{transform:scale(1.15) translateY(0);opacity:1}
+    60%{transform:scale(0.95) translateY(-10px)}
+    80%{transform:scale(1.02) translateY(0)}
+    100%{transform:scale(1) translateY(0)}
+}
+/* 琉璃质感副标题 */
+.fancy-subtitle{
+    font-size:26px;
+    margin-top:20px;
+    opacity:0;
+    transform:translateY(30px);
+    transition:all 1s cubic-bezier(0.4,0,0.2,1);
+    /* 琉璃透明渐变 */
+    background:linear-gradient(
+        120deg,
+        rgba(255,182,193,0.9) 0%,
+        rgba(255,255,255,0.95) 25%,
+        rgba(230,230,250,0.9) 50%,
+        rgba(255,182,193,0.9) 75%,
+        rgba(255,255,255,0.95) 100%
+    );
+    background-size:200% 200%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    /* 琉璃光晕 */
+    filter:drop-shadow(0 0 10px rgba(255,182,193,0.5))
+           drop-shadow(0 0 20px rgba(255,255,255,0.3));
+    animation:glassShimmer 6s ease infinite;
+    position:relative
+}
+@keyframes glassShimmer{
+    0%,100%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+}
+.fancy-subtitle.show{
+    opacity:1;
+    transform:translateY(0)
+}
+/* 柔光背景 */
+.soft-glow{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:400px;
+    height:400px;
+    background:radial-gradient(
+        circle,
+        rgba(255,215,0,0.15) 0%,
+        rgba(255,182,193,0.1) 40%,
+        rgba(230,230,250,0.08) 70%,
+        transparent 100%
+    );
+    border-radius:50%;
+    filter:blur(40px);
+    animation:glowPulse 3s ease-in-out infinite;
+    pointer-events:none;
+    z-index:-1
+}
+@keyframes glowPulse{
+    0%,100%{opacity:0.6;transform:translate(-50%,-50%) scale(1)}
+    50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}
+}
+/* 礼花粒子 - 彩色碎钻 */
+.firework{position:absolute;width:100%;height:100%;pointer-events:none;z-index:5}
+.firework span{
+    position:absolute;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    animation:diamondExplode 1.8s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
+    opacity:0;
+    /* 碎钻光泽 */
+    box-shadow:
+        0 0 6px rgba(255,255,255,0.9),
+        0 0 12px rgba(255,215,0,0.6),
+        inset 0 0 4px rgba(255,255,255,0.8)
+}
+@keyframes diamondExplode{
+    0%{
+        transform:translate(0,0) scale(1) rotate(0deg);
+        opacity:1
+    }
+    100%{
+        transform:translate(var(--tx),var(--ty)) scale(0.3) rotate(720deg);
+        opacity:0
+    }
+}
+/* 闪烁星星 - 碎钻质感 */
+.twinkle{position:absolute;width:100%;height:100%;pointer-events:none;z-index:4}
+.twinkle span{
+    position:absolute;
+    font-size:18px;
+    animation:diamondTwinkle 2.5s ease-in-out infinite;
+    opacity:0;
+    /* 碎钻光芒 */
+    text-shadow:
+        0 0 10px rgba(255,255,255,0.9),
+        0 0 20px rgba(255,215,0,0.6),
+        0 0 30px rgba(255,182,193,0.4)
+}
+@keyframes diamondTwinkle{
+    0%,100%{opacity:0;transform:scale(0) rotate(0deg)}
+    25%{opacity:1;transform:scale(1.2) rotate(90deg)}
+    50%{opacity:0.8;transform:scale(1) rotate(180deg)}
+    75%{opacity:1;transform:scale(1.1) rotate(270deg)}
+}
+/* 羽毛飘散效果 */
+.feather{position:absolute;width:100%;height:100%;pointer-events:none;z-index:6}
+.feather span{
+    position:absolute;
+    font-size:20px;
+    opacity:0;
+    animation:featherFloat 4s ease-in-out forwards;
+    filter:drop-shadow(0 0 8px rgba(255,255,255,0.6))
+}
+@keyframes featherFloat{
+    0%{
+        opacity:0;
+        transform:translateY(-20px) translateX(0) rotate(0deg) scale(0.8)
+    }
+    10%{
+        opacity:0.8
+    }
+    100%{
+        opacity:0;
+        transform:translateY(100vh) translateX(var(--fx)) rotate(720deg) scale(1.2)
+    }
+}
+/* 星光拖尾 */
+.stellar-trail{position:absolute;width:100%;height:100%;pointer-events:none;z-index:7}
+.stellar-trail span{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:radial-gradient(circle,rgba(255,255,255,1) 0%,transparent 70%);
+    border-radius:50%;
+    animation:stellarFloat 3s ease-out forwards;
+    opacity:0
+}
+@keyframes stellarFloat{
+    0%{
+        opacity:1;
+        transform:translate(0,0) scale(1)
+    }
+    100%{
+        opacity:0;
+        transform:translate(var(--sx),var(--sy)) scale(0.2)
+    }
+}
+
+/* 相册页 */
+#page2{background:linear-gradient(to bottom,#fff5f7,#ffe6ea);display:none}
+.album-container{width:90%;max-width:500px;height:420px;position:relative}
+.photo-slide{width:100%;height:100%;position:relative;overflow:hidden;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+.photo-wrapper{display:flex;transition:transform 0.5s ease;width:100%;height:100%}
+.photo-item{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#fff}
+.photo-item img{width:100%;height:100%;object-fit:cover;cursor:pointer}
+.photo-nav{display:flex;justify-content:center;gap:8px;margin-top:15px}
+.photo-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:1000;align-items:center;justify-content:center}
+.photo-modal img{max-width:95%;max-height:95%;object-fit:contain}
+.photo-modal .close-hint{position:absolute;bottom:30px;color:#fff;font-size:16px;opacity:0.7}
+.nav-dot{width:10px;height:10px;border-radius:50%;background:#ddd;cursor:pointer;transition:all 0.3s}
+.nav-dot.active{background:#e45f7f;width:25px;border-radius:5px}
+.photo-counter{position:absolute;top:15px;right:15px;background:rgba(0,0,0,0.6);color:#fff;padding:5px 12px;border-radius:15px;font-size:13px}
+.sub{margin-top:20px;font-size:16px;color:#c94c6c}
+
+/* 情书页 - 互动效果 */
+#page3{
+    background:linear-gradient(135deg,#fdf6f8 0%,#fff0f5 100%);
+    padding:30px;
+    display:none;
+    overflow-y:auto;
+    position:relative
+}
+.letter-card{
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+    max-width:550px;
+    box-shadow:0 10px 40px rgba(228,95,127,0.15);
+    line-height:2;
+    font-size:15px;
+    color:#444;
+    text-align:left;
+    position:relative;
+    transform:rotate(-1deg);
+    transition:all 0.5s;
+    cursor:pointer
+}
+.letter-card:hover{
+    transform:rotate(0deg) scale(1.02);
+    box-shadow:0 15px 50px rgba(228,95,127,0.25)
+}
+.letter-card::before{
+    content:'';
+    position:absolute;
+    top:-10px;
+    right:-10px;
+    width:60px;
+    height:60px;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e45f7f'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E") no-repeat;
+    background-size:contain;
+    opacity:0.2;
+    animation:heartBeat 2s ease-in-out infinite
+}
+@keyframes heartBeat{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.1)}
+}
+.letter-card h2{
+    color:#e45f7f;
+    margin-bottom:20px;
+    text-align:center;
+    font-size:22px;
+    position:relative;
+    display:inline-block;
+    left:50%;
+    transform:translateX(-50%)
+}
+.letter-card h2::after{
+    content:'💌';
+    position:absolute;
+    right:-30px;
+    animation:envelopeFloat 3s ease-in-out infinite
+}
+@keyframes envelopeFloat{
+    0%,100%{transform:translateY(0) rotate(0deg)}
+    50%{transform:translateY(-10px) rotate(10deg)}
+}
+.letter-content{
+    margin-top:20px;
+    position:relative
+}
+.letter-content p{
+    margin:15px 0;
+    text-indent:2em;
+    opacity:0;
+    transform:translateX(-20px);
+    transition:all 0.6s ease
+}
+.letter-content p.show{
+    opacity:1;
+    transform:translateX(0)
+}
+.letter-content p::before{
+    content:'🌸';
+    position:absolute;
+    left:-25px;
+    opacity:0;
+    transition:opacity 0.3s
+}
+.letter-content p.show::before{
+    opacity:0.6
+}
+.letter-hint{
+    text-align:center;
+    color:#e45f7f;
+    margin-top:20px;
+    font-size:16px;
+    animation:hintPulse 2s ease-in-out infinite
+}
+@keyframes hintPulse{
+    0%,100%{opacity:0.6}
+    50%{opacity:1}
+}
+.floating-hearts{
+    position:absolute;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden
+}
+.floating-hearts span{
+    position:absolute;
+    font-size:20px;
+    animation:heartFloat 4s ease-in-out infinite;
+    opacity:0
+}
+@keyframes heartFloat{
+    0%{
+        opacity:0;
+        transform:translateY(100vh) scale(0);
+    }
+    10%{
+        opacity:0.8;
+    }
+    100%{
+        opacity:0;
+        transform:translateY(-100px) scale(1);
+    }
+}
+
+/* 情话页 - 互动效果 */
+#page4{
+    background:linear-gradient(135deg,#fff8f9 0%,#ffeef2 100%);
+    display:none;
+    position:relative;
+    overflow:hidden
+}
+.card{
+    background:#fff;
+    border-radius:24px;
+    padding:30px;
+    max-width:460px;
+    box-shadow:0 15px 50px rgba(228,95,127,0.2);
+    position:relative;
+    transform:rotate(1deg);
+    transition:all 0.4s ease;
+    cursor:pointer
+}
+.card:hover{
+    transform:rotate(0deg) scale(1.05);
+    box-shadow:0 20px 60px rgba(228,95,127,0.3)
+}
+.card h2{
+    color:#e45f7f;
+    margin-bottom:16px;
+    position:relative;
+    display:inline-block
+}
+.card h2::after{
+    content:'';
+    position:absolute;
+    bottom:-5px;
+    left:0;
+    width:100%;
+    height:2px;
+    background:linear-gradient(90deg,transparent,#e45f7f,transparent);
+    animation:lineGlow 2s ease-in-out infinite
+}
+@keyframes lineGlow{
+    0%,100%{opacity:0.5;width:80%;left:10%}
+    50%{opacity:1;width:100%;left:0}
+}
+.card p{
+    line-height:1.9;
+    font-size:16px;
+    color:#555;
+    position:relative
+}
+.card p br{
+    position:relative
+}
+.card-decoration{
+    position:absolute;
+    top:-20px;
+    right:-20px;
+    font-size:40px;
+    animation:decoFloat 3s ease-in-out infinite
+}
+@keyframes decoFloat{
+    0%,100%{transform:rotate(-10deg) translateY(0)}
+    50%{transform:rotate(10deg) translateY(-10px)}
+}
+.card::after{
+    content:'✨';
+    position:absolute;
+    bottom:-15px;
+    left:-15px;
+    font-size:30px;
+    animation:sparkleFloat 2.5s ease-in-out infinite
+}
+.butterfly{
+    position:absolute;
+    font-size:24px;
+    animation:butterflyFly 6s ease-in-out infinite;
+    opacity:0;
+    pointer-events:none
+}
+@keyframes butterflyFly{
+    0%{
+        opacity:0;
+        transform:translateX(-100px) translateY(0) rotate(0deg);
+    }
+    10%{
+        opacity:1;
+    }
+    90%{
+        opacity:1;
+    }
+    100%{
+        opacity:0;
+        transform:translateX(calc(100vw + 100px)) translateY(200px) rotate(360deg);
+    }
+}
+
+/* 奔跑页 - 仪式感 */
+#page45{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:none;position:relative;overflow:hidden}
+.running-page{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative}
+.running-hint{
+    position:absolute;
+    top:20%;
+    color:rgba(255,255,255,0.9);
+    font-size:18px;
+    animation:hintPulse 2s ease-in-out infinite;
+    cursor:pointer;
+    text-shadow:0 0 20px rgba(255,255,255,0.5)
+}
+@keyframes hintPulse{
+    0%,100%{opacity:0.7;transform:scale(1)}
+    50%{opacity:1;transform:scale(1.05)}
+}
+.running-content{
+    width:90%;
+    max-width:500px;
+    text-align:center;
+    position:relative;
+    z-index:10
+}
+.running-line{
+    font-size:22px;
+    color:#fff;
+    margin:25px 0;
+    opacity:0;
+    transform:translateY(30px);
+    transition:all 0.8s cubic-bezier(0.34,1.56,0.64,1);
+    text-shadow:0 0 20px rgba(255,255,255,0.5),0 0 40px rgba(255,182,193,0.3);
+    line-height:1.6;
+    letter-spacing:1px
+}
+.running-line.show{
+    opacity:1;
+    transform:translateY(0)
+}
+.running-line::before{
+    content:'';
+    position:absolute;
+    left:-30px;
+    top:50%;
+    transform:translateY(-50%);
+    width:0;
+    height:2px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.8));
+    transition:width 0.6s ease 0.3s
+}
+.running-line.show::before{
+    width:20px
+}
+.wind-effect{
+    position:absolute;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:1
+}
+.wind-effect span{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:rgba(255,255,255,0.6);
+    border-radius:50%;
+    animation:windFloat 3s linear infinite;
+    opacity:0
+}
+@keyframes windFloat{
+    0%{
+        opacity:0;
+        transform:translateX(-100px) translateY(0);
+    }
+    10%{
+        opacity:1;
+    }
+    100%{
+        opacity:0;
+        transform:translateX(100vw) translateY(var(--windY));
+    }
+}
+
+/* 祝福页 - 艺术效果 */
+#page5{
+    background:linear-gradient(135deg,#fff5f7 0%,#ffe6ea 50%,#ffd1dc 100%);
+    display:none;
+    overflow:hidden
+}
+.birthday-scene{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    position:relative
+}
+.cake-container{
+    position:relative;
+    width:280px;
+    height:200px;
+    margin-bottom:40px
+}
+.cake{
+    position:relative;
+    width:100%;
+    height:100%
+}
+.cake-layer{
+    position:absolute;
+    border-radius:10px;
+    background:linear-gradient(135deg,#f8d5c2,#f5b8a8)
+}
+.cake-bottom{
+    width:280px;
+    height:60px;
+    bottom:0;
+    background:linear-gradient(135deg,#f8d5c2,#f5b8a8)
+}
+.cake-middle{
+    width:240px;
+    height:55px;
+    bottom:60px;
+    left:20px;
+    background:linear-gradient(135deg,#f5b8a8,#f0a08a)
+}
+.cake-top{
+    width:200px;
+    height:50px;
+    bottom:115px;
+    left:40px;
+    background:linear-gradient(135deg,#f0a08a,#e88a7a);
+    border-radius:10px 10px 5px 5px
+}
+.cake-decoration{
+    position:absolute;
+    bottom:115px;
+    left:50%;
+    transform:translateX(-50%);
+    width:180px;
+    height:8px;
+    background:linear-gradient(90deg,transparent,#fff 20%,#fff 80%,transparent);
+    border-radius:4px
+}
+.candle-wrapper{
+    position:absolute;
+    bottom:165px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:10
+}
+.candle{
+    width:20px;
+    height:50px;
+    background:linear-gradient(135deg,#fff 0%,#f0e6d2 50%,#e6d2a0 100%);
+    border-radius:3px;
+    position:relative;
+    cursor:pointer;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    animation:candleFlicker 0.1s infinite;
+    transition:all 0.5s
+}
+@keyframes candleFlicker{
+    0%,100%{opacity:1}
+    50%{opacity:0.98}
+}
+.flame{
+    position:absolute;
+    top:-35px;
+    left:50%;
+    transform:translateX(-50%);
+    width:20px;
+    height:35px;
+    cursor:pointer
+}
+.flame-core{
+    position:absolute;
+    width:16px;
+    height:28px;
+    background:linear-gradient(to top,#ff6b35 0%,#ffcc00 40%,#ffff00 100%);
+    border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+    left:2px;
+    animation:flameDance 0.3s ease-in-out infinite;
+    box-shadow:0 0 20px rgba(255,204,0,0.8)
+}
+@keyframes flameDance{
+    0%,100%{transform:scale(1) rotate(-2deg)}
+    25%{transform:scale(1.05,0.95) rotate(1deg)}
+    50%{transform:scale(0.95,1.05) rotate(-1deg)}
+    75%{transform:scale(1.02,0.98) rotate(2deg)}
+}
+.flame-glow{
+    position:absolute;
+    top:-10px;
+    left:-15px;
+    width:50px;
+    height:60px;
+    background:radial-gradient(ellipse,rgba(255,204,0,0.4) 0%,transparent 70%);
+    border-radius:50%;
+    animation:glowPulse 0.5s ease-in-out infinite
+}
+@keyframes glowPulse{
+    0%,100%{opacity:0.6;transform:scale(1)}
+    50%{opacity:1;transform:scale(1.1)}
+}
+.flame-particles{
+    position:absolute;
+    top:-50px;
+    left:50%;
+    width:40px;
+    height:60px;
+    pointer-events:none
+}
+.flame-particles::before,
+.flame-particles::after{
+    content:'';
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:rgba(255,204,0,0.8);
+    border-radius:50%;
+    animation:particleFloat 1s ease-in-out infinite
+}
+.flame-particles::before{
+    left:10px;
+    animation-delay:0s
+}
+.flame-particles::after{
+    right:10px;
+    animation-delay:0.5s
+}
+@keyframes particleFloat{
+    0%,100%{opacity:0;transform:translateY(0) scale(0)}
+    50%{opacity:1;transform:translateY(-20px) scale(1)}
+}
+.candle.extinguished{
+    animation:smokeRise 0.5s ease-out
+}
+.candle.extinguished .flame{
+    display:none
+}
+@keyframes smokeRise{
+    0%{filter:brightness(1)}
+    50%{filter:brightness(0.8)}
+    100%{filter:brightness(0.6)}
+}
+.smoke{
+    position:absolute;
+    top:-40px;
+    left:50%;
+    transform:translateX(-50%);
+    width:20px;
+    height:40px;
+    opacity:0;
+    pointer-events:none
+}
+.smoke::before,
+.smoke::after{
+    content:'';
+    position:absolute;
+    width:10px;
+    height:10px;
+    background:rgba(100,100,100,0.6);
+    border-radius:50%;
+    animation:smokeFloat 1.5s ease-out
+}
+.smoke::before{
+    left:0
+}
+.smoke::after{
+    right:0
+}
+@keyframes smokeFloat{
+    0%{opacity:0;transform:translateY(0) scale(0.5)}
+    30%{opacity:0.8;transform:translateY(-20px) scale(1)}
+    100%{opacity:0;transform:translateY(-60px) scale(1.5)}
+}
+.wish-text{
+    text-align:center;
+    z-index:10
+}
+.wish-title{
+    font-size:42px;
+    font-weight:bold;
+    background:linear-gradient(135deg,#e45f7f 0%,#ff6b6b 50%,#ff8e53 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    margin-bottom:15px;
+    animation:textGlow 2s ease-in-out infinite
+}
+@keyframes textGlow{
+    0%,100%{filter:drop-shadow(0 0 10px rgba(228,95,127,0.5))}
+    50%{filter:drop-shadow(0 0 20px rgba(228,95,127,0.8))}
+}
+.wish-hint{
+    font-size:18px;
+    color:#c94c6c;
+    opacity:0.8;
+    animation:hintBounce 1.5s ease-in-out infinite
+}
+@keyframes hintBounce{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-5px)}
+}
+.sparkles{
+    position:absolute;
+    width:100%;
+    height:100%;
+    pointer-events:none
+}
+.sparkles span{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:radial-gradient(circle,#fff 0%,rgba(255,255,255,0) 70%);
+    border-radius:50%;
+    animation:sparkleFloat 3s ease-in-out infinite;
+    opacity:0
+}
+@keyframes sparkleFloat{
+    0%,100%{opacity:0;transform:translateY(0) scale(0)}
+    50%{opacity:1;transform:translateY(-30px) scale(1)}
+}
+
+/* 飘落 */
+.fall{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.fall span{position:absolute;animation:fall 6s linear infinite}
+@keyframes fall{0%{transform:translateY(-10vh)}100%{transform:translateY(110vh)}}
+
+/* 弹窗 */
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:99;align-items:center;justify-content:center}
+.modal-box{background:#fff;padding:30px;border-radius:20px;text-align:center}
+.modal-btn{background:#e45f7f;color:#fff;border:none;padding:10px 24px;border-radius:20px;font-size:14px;cursor:pointer;margin-top:15px}
+
+/* 相册控制按钮 */
+.album-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.8);border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:20px;z-index:10;transition:all 0.3s}
+.album-btn:hover{background:#fff;transform:translateY(-50%) scale(1.1)}
+.prev-btn{left:-50px}
+.next-btn{right:-50px}
+
+@media(max-width:600px){
+.prev-btn{left:5px}
+.next-btn{right:5px}
+}
+
+/* 导航按钮 */
+.nav-btn-container{position:fixed;top:50%;transform:translateY(-50%);width:100%;pointer-events:none;z-index:100;display:flex;justify-content:space-between;padding:0 20px}
+.nav-btn{pointer-events:auto;background:rgba(255,255,255,0.9);border:none;padding:12px 24px;border-radius:25px;cursor:pointer;font-size:14px;font-weight:bold;color:#e45f7f;box-shadow:0 4px 15px rgba(0,0,0,0.2);transition:all 0.3s}
+.nav-btn:hover{background:#fff;transform:scale(1.05)}
+.nav-btn:disabled{opacity:0.3;cursor:not-allowed}
+</style>
+</head>
+
+<body>
+<audio id="clickSnd" src="https://cdn.jsdelivr.net/gh/funnydyf/sound@main/click.wav"></audio>
+<audio id="openSnd" src="https://cdn.jsdelivr.net/gh/funnydyf/sound@main/open.wav"></audio>
+<audio id="bgm" loop src="http://mp31.dongting.com/32/89/3289381222_128.mp3"></audio>
+
+<div class="fall" id="fall"></div>
+
+<!-- 1 -->
+<div class="page" id="page1">
+<div class="gift" id="gift">🎁</div>
+<div class="fancy-title" id="fancyTitle">
+<div class="soft-glow"></div>
+<h1 id="mainTitle">最最最爱的炸酱，生日快乐~</h1>
+<div class="fancy-subtitle" id="subTitle">请接收小舟酱的心意！</div>
+</div>
+<div class="firework" id="firework"></div>
+<div class="twinkle" id="twinkle"></div>
+<div class="feather" id="feather"></div>
+<div class="stellar-trail" id="stellarTrail"></div>
+</div>
+
+<!-- 2 - 相册页 -->
+<div class="page" id="page2">
+<div class="album-container">
+<div class="photo-slide">
+<div class="photo-wrapper" id="photoWrapper">
+<div class="photo-item"><img src="photo1.jpg" alt="照片 1"></div>
+<div class="photo-item"><img src="photo2.jpg" alt="照片 2"></div>
+<div class="photo-item"><img src="photo3.jpg" alt="照片 3"></div>
+<div class="photo-item"><img src="photo4.jpg" alt="照片 4"></div>
+<div class="photo-item"><img src="photo5.jpg" alt="照片 5"></div>
+<div class="photo-item"><img src="photo6.jpg" alt="照片 6"></div>
+<div class="photo-item"><img src="photo7.jpg" alt="照片 7"></div>
+<div class="photo-item"><img src="photo8.jpg" alt="照片 8"></div>
+<div class="photo-item"><img src="photo9.jpg" alt="照片 9"></div>
+<div class="photo-item"><img src="photo10.jpg" alt="照片 10"></div>
+<div class="photo-item"><img src="photo11.jpg" alt="照片 11"></div>
+<div class="photo-item"><img src="photo12.jpg" alt="照片 12"></div>
+<div class="photo-item"><img src="photo13.jpg" alt="照片 13"></div>
+<div class="photo-item"><img src="photo14.jpg" alt="照片 14"></div>
+<div class="photo-item"><img src="photo15.jpg" alt="照片 15"></div>
+<div class="photo-item"><img src="photo16.jpg" alt="照片 16"></div>
+<div class="photo-item"><img src="photo17.jpg" alt="照片 17"></div>
+<div class="photo-item"><img src="photo18.jpg" alt="照片 18"></div>
+<div class="photo-item"><img src="photo19.jpg" alt="照片 19"></div>
+<div class="photo-item"><img src="photo20.jpg" alt="照片 20"></div>
+<div class="photo-item"><img src="photo21.jpg" alt="照片 21"></div>
+<div class="photo-item"><img src="photo22.jpg" alt="照片 22"></div>
+<div class="photo-item"><img src="photo23.jpg" alt="照片 23"></div>
+<div class="photo-item"><img src="photo24.jpg" alt="照片 24"></div>
+<div class="photo-item"><img src="photo25.jpg" alt="照片 25"></div>
+<div class="photo-item"><img src="photo26.jpg" alt="照片 26"></div>
+<div class="photo-item"><img src="photo27.jpg" alt="照片 27"></div>
+<div class="photo-item"><img src="photo28.jpg" alt="照片 28"></div>
+<div class="photo-item"><img src="photo29.jpg" alt="照片 29"></div>
+<div class="photo-item"><img src="photo30.jpg" alt="照片 30"></div>
+</div>
+<div class="photo-counter" id="photoCounter">1 / 30</div>
+</div>
+<button class="album-btn prev-btn" id="prevBtn">◀</button>
+<button class="album-btn next-btn" id="nextBtn">▶</button>
+</div>
+<div class="photo-nav" id="photoNav"></div>
+<div class="sub">💕 我们的珍贵回忆 • 左右滑动查看更多</div>
+</div>
+
+<!-- 3 - 情书页 -->
+<div class="page" id="page3">
+<div class="floating-hearts" id="floatingHearts"></div>
+<div class="letter-card" id="letterCard">
+<div class="card-decoration">💝</div>
+<h2>💌 小舟来信</h2>
+<div class="letter-content" id="letterContent">
+<p>想你了，所以给你写信。</p>
+<p>谢谢你拥有超乎常人的勇气走到 25 岁的今天，谢谢你走到我的身边。我们学习着彼此的呼吸与节奏，所以谢谢你教给我坚韧的力量，如果说我是一颗树的话，我想谢谢你带给我四季应有的温度和关照。三年的时间不长不短，可以是一个刚写好的笔记未干的开头，也可以是生命里长长的深深的根。</p>
+<p>我总喜欢说"都怪你"。明明是我自己走路不小心绊了一下，却偏要扭头嗔怪你。明明是我经常丢三落四，却理直气壮地埋怨你。你从不争辩，只是好脾气地笑着，顺着我的话说："对，都怪我。"我们其实并不像我想要的那么契合。有时我说的话，你会错意。你做的事，我不称心。我们像两片不同形状的云，偶尔碰撞，便会落下细雨。但不知从什么时候开始，我在这片雨声中感受到了前所未有的安心。</p>
+<p>我仍然会忍不住问一些无足轻重的问题。明明知道答案，却还是想听你一遍遍地确认。</p>
+<p>都怪你，我变得那么脆弱。你却说我变勇敢了。倘若放心依赖一个人也算一种勇气，那么我的脆弱，不过是因为有了可以安心依靠的胸怀。连眼泪都变成了被温柔包裹时蒸腾的水汽，不再苦涩。每一句，都怪你，其实是"我很依赖你。"</p>
+<p>想要见到你，想要听见你的声音，想要轻松地在你身边生活。这些事情原来都这么难做到，最习以为常的小事，最信手拈来的方式，居然是这么大的天堑。不过我最擅长的事情就是接受痛苦，所以我会来到你的身边，哪怕万里，哪怕难行。</p>
+</div>
+<div class="letter-hint" id="letterHint">💕 点击信纸，展开我的心意</div>
+</div>
+</div>
+
+<!-- 4 -->
+<div class="page" id="page4">
+<div class="butterfly" id="butterfly1">🦋</div>
+<div class="butterfly" id="butterfly2">🦋</div>
+<div class="card" id="card">
+<div class="card-decoration">🌸</div>
+<h2>💌 想对你说</h2>
+<p>幸福不是刻意制造<br>而是用心发现<br>一定是这样<br><br>
+让我们一起慢慢走<br>轻松过 ❤️</p>
+</div>
+</div>
+
+<!-- 4.5 - 奔跑页 -->
+<div class="page" id="page45">
+<div class="running-page">
+<div class="running-hint" id="runningHint">💌 点击屏幕，接收我的心意</div>
+<div class="running-content" id="runningContent">
+<div class="running-line" id="line1">想快点见到你。</div>
+<div class="running-line" id="line2">我开始质疑飞速的列车，</div>
+<div class="running-line" id="line3">不够，我又希望飞机早些降落，</div>
+<div class="running-line" id="line4">还不够，</div>
+<div class="running-line" id="line5">于是我动身奔跑起来，</div>
+<div class="running-line" id="line6">今夜吹向你的风，</div>
+<div class="running-line" id="line7">你猜哪一阵是我呢。</div>
+</div>
+<div class="wind-effect" id="windEffect"></div>
+</div>
+</div>
+
+<!-- 5 -->
+<div class="page" id="page5">
+<div class="birthday-scene">
+<div class="cake-container">
+<div class="cake">
+<div class="cake-layer cake-bottom"></div>
+<div class="cake-layer cake-middle"></div>
+<div class="cake-layer cake-top"></div>
+<div class="cake-decoration"></div>
+</div>
+<div class="candle-wrapper" id="candleWrapper">
+<div class="candle" id="candle">
+<div class="flame" id="flame">
+<div class="flame-core"></div>
+<div class="flame-glow"></div>
+<div class="flame-particles"></div>
+</div>
+</div>
+<div class="smoke" id="smoke"></div>
+</div>
+</div>
+<div class="wish-text" id="wishText">
+<div class="wish-title">🎂 生日快乐</div>
+<div class="wish-hint">点击蜡烛，许下一个愿望</div>
+</div>
+<div class="sparkles" id="sparkles"></div>
+</div>
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-box">
+<h3 style="color:#e45f7f;margin-bottom:15px">✨ 愿望实现</h3>
+<p style="color:#555;line-height:1.8">你从来不是一个人<br>我们一直在一起</p>
+<button class="modal-btn" onclick="closeModal()">确定</button>
+</div>
+</div>
+
+<!-- 照片放大查看 -->
+<div class="photo-modal" id="photoModal">
+<img src="" alt="放大照片" id="modalPhoto">
+<div class="close-hint">点击任意位置关闭</div>
+</div>
+
+<!-- 页面导航按钮 -->
+<div class="nav-btn-container" id="navBtnContainer" style="display:none">
+<button class="nav-btn" id="pagePrevBtn">◀ 上一页</button>
+<button class="nav-btn" id="pageNextBtn">下一页 ▶</button>
+</div>
+
+<div class="arrow">点击或滑动翻页</div>
+
+<script>
+// 飘落
+const f=document.getElementById('fall'),i=['✨','❤️','🎉','⭐','🎀','']
+for(let t=0;t<40;t++){let s=document.createElement('span');s.innerText=i[Math.floor(Math.random()*i.length)],s.style.left=Math.random()*100+'%',s.style.animationDuration=Math.random()*6+4+'s',f.appendChild(s)}
+
+// 闪烁星星 - 碎钻质感
+const tw=document.getElementById('twinkle')
+for(let t=0;t<30;t++){
+    const star=document.createElement('span')
+    star.innerText='⭐'
+    star.style.left=Math.random()*100+'%'
+    star.style.top=Math.random()*100+'%'
+    star.style.animationDelay=Math.random()*2.5+'s'
+    tw.appendChild(star)
+}
+
+// 礼花效果 - 彩色碎钻
+function createFirework(){
+    const fw=document.getElementById('firework')
+    const colors=[
+        'radial-gradient(circle,#ffd700 0%,#ffecd2 50%,transparent 100%)',
+        'radial-gradient(circle,#ff69b4 0%,#ffb6c1 50%,transparent 100%)',
+        'radial-gradient(circle,#dda0dd 0%,#e6e6fa 50%,transparent 100%)',
+        'radial-gradient(circle,#00ffff 0%,#b0e0e6 50%,transparent 100%)',
+        'radial-gradient(circle,#ffffff 0%,#f0f8ff 50%,transparent 100%)',
+        'radial-gradient(circle,#ff6b6b 0%,#ffecd2 50%,transparent 100%)'
+    ]
+    const centerX=window.innerWidth/2
+    const centerY=window.innerHeight/2
+    
+    for(let i=0;i<80;i++){
+        const particle=document.createElement('span')
+        const angle=(Math.PI*2/80)*i
+        const velocity=250+Math.random()*200
+        const tx=Math.cos(angle)*velocity
+        const ty=Math.sin(angle)*velocity
+        const color=colors[Math.floor(Math.random()*colors.length)]
+        
+        particle.style.left=centerX+'px'
+        particle.style.top=centerY+'px'
+        particle.style.background=color
+        particle.style.setProperty('--tx',tx+'px')
+        particle.style.setProperty('--ty',ty+'px')
+        particle.style.animationDelay=(i*0.015)+'s'
+        
+        fw.appendChild(particle)
+        
+        setTimeout(()=>{
+            particle.remove()
+        },2500)
+    }
+}
+
+// 羽毛飘散效果
+function createFeathers(){
+    const feather=document.getElementById('feather')
+    const featherEmojis=['🪶','✨','💫','⭐']
+    
+    for(let i=0;i<15;i++){
+        const f=document.createElement('span')
+        f.innerText=featherEmojis[Math.floor(Math.random()*featherEmojis.length)]
+        const startX=Math.random()*window.innerWidth
+        const fx=(Math.random()-0.5)*400
+        f.style.left=startX+'px'
+        f.style.top='-30px'
+        f.style.setProperty('--fx',fx+'px')
+        f.style.animationDelay=(i*0.3)+'s'
+        
+        feather.appendChild(f)
+        
+        setTimeout(()=>{
+            f.remove()
+        },6000)
+    }
+}
+
+// 星光拖尾效果
+function createStellarTrails(){
+    const trail=document.getElementById('stellarTrail')
+    
+    for(let i=0;i<40;i++){
+        const s=document.createElement('span')
+        const angle=Math.random()*Math.PI*2
+        const distance=100+Math.random()*200
+        const sx=Math.cos(angle)*distance
+        const sy=Math.sin(angle)*distance
+        
+        s.style.left=(window.innerWidth/2)+'px'
+        s.style.top=(window.innerHeight/2)+'px'
+        s.style.setProperty('--sx',sx+'px')
+        s.style.setProperty('--sy',sy+'px')
+        s.style.animationDelay=(i*0.05)+'s'
+        
+        trail.appendChild(s)
+        
+        setTimeout(()=>{
+            s.remove()
+        },4000)
+    }
+}
+
+// 翻页
+let p=1;const a=['page1','page2','page3','page4','page45','page5']
+const visitedPages=new Set([1])
+function n(){if(p<6){p++;visitedPages.add(p);sh();updateNavBtns()}}
+function prevPage(){if(p>1){p--;visitedPages.add(p);sh();updateNavBtns()}}
+function sh(){
+    a.forEach((e,t)=>{
+        document.getElementById(e).style.display=t+1===p?'flex':'none'
+    })
+    updateNavBtns()
+}
+function updateNavBtns(){
+    const container=document.getElementById('navBtnContainer')
+    const prevBtn=document.getElementById('pagePrevBtn')
+    const nextBtn=document.getElementById('pageNextBtn')
+    
+    if(p>1){
+        container.style.display='flex'
+        prevBtn.disabled=p===1
+        nextBtn.disabled=p===6
+    }else{
+        container.style.display='none'
+    }
+}
+
+// 相册功能
+let currentPhoto=0;
+const totalPhotos=30;
+const wrapper=document.getElementById('photoWrapper');
+const counter=document.getElementById('photoCounter');
+const nav=document.getElementById('photoNav');
+const photoModal=document.getElementById('photoModal');
+const modalPhoto=document.getElementById('modalPhoto');
+
+// 创建导航点
+for(let i=0;i<totalPhotos;i++){
+    const dot=document.createElement('div');
+    dot.className='nav-dot'+(i===0?' active':'');
+    dot.onclick=()=>goToPhoto(i);
+    nav.appendChild(dot);
+}
+
+function updatePhoto(){
+    wrapper.style.transform=`translateX(-${currentPhoto*100}%)`;
+    counter.innerText=`${currentPhoto+1} / ${totalPhotos}`;
+    document.querySelectorAll('.nav-dot').forEach((dot,i)=>{
+        dot.classList.toggle('active',i===currentPhoto);
+    });
+}
+
+function goToPhoto(index){
+    currentPhoto=index;
+    updatePhoto();
+    document.getElementById('clickSnd').play().catch(()=>{});
+}
+
+function prevPhoto(){
+    if(currentPhoto>0){currentPhoto--;updatePhoto();document.getElementById('clickSnd').play().catch(()=>{});}
+}
+
+function nextPhoto(){
+    if(currentPhoto<totalPhotos-1){currentPhoto++;updatePhoto();document.getElementById('clickSnd').play().catch(()=>{});}
+}
+
+// 照片放大功能
+function openPhotoModal(photoSrc){
+    modalPhoto.src=photoSrc;
+    photoModal.style.display='flex';
+    document.getElementById('clickSnd').play().catch(()=>{});
+}
+
+function closePhotoModal(){
+    photoModal.style.display='none';
+}
+
+photoModal.onclick=()=>closePhotoModal();
+
+document.getElementById('prevBtn').onclick=(e)=>{e.stopPropagation();prevPhoto();}
+document.getElementById('nextBtn').onclick=(e)=>{e.stopPropagation();nextPhoto();}
+
+// 为所有照片添加点击事件
+document.querySelectorAll('.photo-item img').forEach(img=>{
+    img.onclick=(e)=>{
+        e.stopPropagation();
+        openPhotoModal(img.src);
+    }
+});
+
+// 滑动相册
+let touchStartX=0,touchEndX=0;
+wrapper.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX},false);
+wrapper.addEventListener('touchend',e=>{
+    touchEndX=e.changedTouches[0].clientX;
+    if(touchStartX-touchEndX>50) nextPhoto();
+    else if(touchEndX-touchStartX>50) prevPhoto();
+},false);
+
+// 点击翻页（排除特殊元素）
+document.body.addEventListener('click',(e)=>{
+    // 第 2 页（相册页）只能通过导航按钮翻页
+    if(p===2){
+        if(!e.target.closest('.nav-btn') && !e.target.closest('.gift') && !e.target.closest('.candle') && !e.target.closest('.modal-btn') && !e.target.closest('.album-container') && !e.target.closest('.photo-item')){
+            // 相册页点击空白处不翻页
+        }
+    }else{
+        if(!e.target.closest('.gift') && !e.target.closest('.candle') && !e.target.closest('.modal-btn') && !e.target.closest('.nav-btn')){
+            document.getElementById('clickSnd').play().catch(()=>{});
+            n()
+        }
+    }
+})
+
+// 导航按钮事件
+document.getElementById('pagePrevBtn').onclick=(e)=>{
+    e.stopPropagation();
+    prevPage();
+    document.getElementById('clickSnd').play().catch(()=>{});
+}
+document.getElementById('pageNextBtn').onclick=(e)=>{
+    e.stopPropagation();
+    n();
+    document.getElementById('clickSnd').play().catch(()=>{});
+}
+
+// 情书页 - 互动效果
+let letterOpened=false;
+document.getElementById('letterCard').onclick=(e)=>{
+    e.stopPropagation();
+    
+    if(!letterOpened){
+        letterOpened=true;
+        
+        // 展开信纸动画
+        const letterCard=document.getElementById('letterCard');
+        letterCard.style.transform='rotate(0deg) scale(1.1)';
+        
+        // 逐段显示文字
+        const paragraphs=document.querySelectorAll('.letter-content p');
+        paragraphs.forEach((p,index)=>{
+            setTimeout(()=>{
+                p.classList.add('show');
+                document.getElementById('clickSnd').play().catch(()=>{});
+            },index*400);
+        });
+        
+        // 隐藏提示
+        setTimeout(()=>{
+            document.getElementById('letterHint').style.display='none';
+        },1000);
+        
+        // 创建漂浮爱心
+        createFloatingHearts();
+    }
+}
+
+function createFloatingHearts(){
+    const hearts=document.getElementById('floatingHearts');
+    const heartEmojis=['❤️','💕','💗','💖','💓'];
+    
+    for(let i=0;i<20;i++){
+        setTimeout(()=>{
+            const heart=document.createElement('span');
+            heart.innerText=heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+            heart.style.left=Math.random()*100+'%';
+            heart.style.animationDelay=Math.random()*2+'s';
+            hearts.appendChild(heart);
+            
+            setTimeout(()=>heart.remove(),4000);
+        },i*200);
+    }
+}
+
+// 情话页 - 互动效果
+let cardClicked=false;
+document.getElementById('card').onclick=(e)=>{
+    e.stopPropagation();
+    
+    if(!cardClicked){
+        cardClicked=true;
+        
+        const card=document.getElementById('card');
+        card.style.transform='rotate(0deg) scale(1.1)';
+        
+        // 创建蝴蝶
+        createButterflies();
+        
+        document.getElementById('clickSnd').play().catch(()=>{});
+    }
+}
+
+function createButterflies(){
+    const butterfly1=document.getElementById('butterfly1');
+    const butterfly2=document.getElementById('butterfly2');
+    
+    butterfly1.style.opacity='1';
+    butterfly2.style.opacity='1';
+    butterfly1.style.top='30%';
+    butterfly2.style.top='50%';
+    
+    // 重置动画
+    butterfly1.style.animation='none';
+    butterfly2.style.animation='none';
+    setTimeout(()=>{
+        butterfly1.style.animation='butterflyFly 6s ease-in-out infinite';
+        butterfly2.style.animation='butterflyFly 6s ease-in-out 0.5s infinite';
+    },10);
+}
+
+// 奔跑页 - 点击显示文字
+let runningLineIndex=0;
+let runningPageInitialized=false;
+const totalLines=7;
+
+function initRunningPage(){
+    if(runningPageInitialized) return;
+    runningPageInitialized=true;
+    
+    // 创建风的效果
+    const wind=document.getElementById('windEffect');
+    for(let i=0;i<30;i++){
+        const span=document.createElement('span');
+        span.style.top=Math.random()*100+'%';
+        span.style.setProperty('--windY',(Math.random()-0.5)*200+'px');
+        span.style.animationDelay=Math.random()*3+'s';
+        span.style.transitionDuration=(2+Math.random()*2)+'s';
+        wind.appendChild(span);
+    }
+    
+    // 点击显示下一行
+    const runningPage=document.getElementById('page45');
+    runningPage.onclick=(e)=>{
+        e.stopPropagation();
+        
+        if(runningLineIndex<totalLines){
+            runningLineIndex++;
+            const line=document.getElementById('line'+runningLineIndex);
+            line.classList.add('show');
+            document.getElementById('clickSnd').play().catch(()=>{});
+            
+            // 最后一行显示后，提示可以翻页
+            if(runningLineIndex===totalLines){
+                setTimeout(()=>{
+                    document.getElementById('runningHint').innerText='💕 点击底部按钮继续';
+                    document.getElementById('runningHint').style.animation='none';
+                    document.getElementById('runningHint').style.opacity='1';
+                },1000);
+            }
+        }
+    };
+}
+
+// 页面切换时初始化奔跑页
+const originalN=n;
+n=function(){
+    if(p===4){ // 从第 4 页切换到第 4.5 页
+        initRunningPage();
+    }
+    originalN();
+}
+
+// 礼物炸开 - 珍珠贝母琉璃效果
+let titleClicked=false;
+let subtitleShown=false;
+document.getElementById('gift').onclick=(e)=>{
+    e.stopPropagation();
+    document.getElementById('openSnd').play().catch(()=>{});
+    document.getElementById('gift').style.display='none';
+    
+    // 显示华丽标题
+    const fancyTitle=document.getElementById('fancyTitle');
+    fancyTitle.style.display='block';
+    
+    // 创建礼花效果 - 三次绽放
+    createFirework();
+    setTimeout(createFirework,300);
+    setTimeout(createFirework,600);
+    
+    // 创建星光拖尾
+    createStellarTrails();
+    
+    // 创建羽毛飘散
+    setTimeout(createFeathers,500);
+    setTimeout(createFeathers,1500);
+    
+    // 主标题出现后，等待再次点击才显示副标题
+    subtitleShown=false;
+    
+    // 开始播放背景音乐
+    setTimeout(()=>{
+        document.getElementById('bgm').play().catch(()=>{});
+    },1000);
+}
+
+// 点击显示副标题
+document.getElementById('fancyTitle').onclick=(e)=>{
+    if(!subtitleShown){
+        e.stopPropagation();
+        document.getElementById('subTitle').classList.add('show');
+        document.getElementById('clickSnd').play().catch(()=>{});
+        
+        // 再次创建礼花和羽毛
+        createFirework();
+        createFeathers();
+        createStellarTrails();
+        
+        subtitleShown=true;
+    }
+}
+
+// 蜡烛 - 艺术效果
+let candleBlown=false;
+document.getElementById('candle').onclick=(e)=>{
+    e.stopPropagation();
+    
+    if(!candleBlown){
+        candleBlown=true;
+        
+        // 吹灭蜡烛动画
+        const flame=document.getElementById('flame');
+        const smoke=document.getElementById('smoke');
+        const candle=document.getElementById('candle');
+        
+        // 火焰闪烁后熄灭
+        flame.style.animation='flameDance 0.1s ease-in-out 3';
+        setTimeout(()=>{
+            candle.classList.add('extinguished');
+            smoke.style.opacity='1';
+            
+            // 创建烟雾粒子
+            createSmokeParticles();
+            
+            // 播放音效
+            document.getElementById('clickSnd').play().catch(()=>{});
+            
+            // 显示愿望弹窗
+            setTimeout(()=>{
+                document.getElementById('modal').style.display='flex';
+            },800);
+            
+            // 创建闪烁星光
+            createSparkles();
+            
+        },300);
+    }
+}
+
+function createSmokeParticles(){
+    const smoke=document.getElementById('smoke');
+    for(let i=0;i<5;i++){
+        setTimeout(()=>{
+            const particle=document.createElement('span');
+            particle.style.cssText=`
+                position:absolute;
+                width:8px;
+                height:8px;
+                background:rgba(100,100,100,0.4);
+                border-radius:50%;
+                left:50%;
+                transform:translateX(-50%);
+                animation:smokeFloat 1.5s ease-out;
+                pointer-events:none;
+            `;
+            smoke.appendChild(particle);
+            setTimeout(()=>particle.remove(),1500);
+        },i*200);
+    }
+}
+
+function createSparkles(){
+    const sparkles=document.getElementById('sparkles');
+    sparkles.innerHTML='';
+    
+    for(let i=0;i<50;i++){
+        const sparkle=document.createElement('span');
+        sparkle.style.left=Math.random()*100+'%';
+        sparkle.style.top=Math.random()*100+'%';
+        sparkle.style.animationDelay=Math.random()*2+'s';
+        sparkles.appendChild(sparkle);
+        
+        setTimeout(()=>{
+            sparkle.style.opacity='1';
+        },i*50);
+    }
+}
+
+function closeModal(){document.getElementById('modal').style.display='none'}
+
+// 滑动翻页
+let touchStartY=0;
+document.addEventListener('touchstart',e=>{touchStartY=e.touches[0].clientY});
+document.addEventListener('touchend',e=>{
+    // 第 2 页（相册页）禁用滑动翻页，只能通过导航按钮
+    if(p!==2){
+        const touchEndY=e.changedTouches[0].clientY;
+        if(touchStartY-touchEndY>50) n();
+        else if(touchEndY-touchStartY>50 && p>1) {p--;sh()}
+    }
+});
+</script>
+</body>
+</html>
